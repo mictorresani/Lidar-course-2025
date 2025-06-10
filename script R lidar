@@ -65,3 +65,20 @@ ggplot(payload(transect), aes(X,Z, color=Z  ) )+ #you can plot also other infos 
   theme_minimal()+
   scale_color_viridis_c(option="viridis")#clip the las with the shapefile of a given polygon
 
+
+
+
+###
+#exercise 2 to do at home
+#create a transect with the new las2
+#show the Classification of a two given points of transect of 10m
+las2<-readLAS("C:/Users/MicTorresani/OneDrive - Scientific Network South Tyrol/varie/corsi/physalia/LiDAR 2025/data/starting_data/las/area2/DownloadService/las_area2.laz" ) 
+p1 <- c(620207, 5156764)
+p2 <- c(620257, 5156764)
+transect<-clip_transect(las2, p1, p2, width = 5) #plot point cloud transect
+
+ggplot(payload(transect), aes(X,Z, color=Z  ) )+
+  geom_point()+
+  theme_minimal()+
+  scale_color_viridis_c(option="viridis")#clip the las with the shapefile of a given polygon
+###
