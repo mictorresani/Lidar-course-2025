@@ -82,3 +82,23 @@ ggplot(payload(transect), aes(X,Z, color=Z  ) )+
   theme_minimal()+
   scale_color_viridis_c(option="viridis")#clip the las with the shapefile of a given polygon
 ###
+
+
+
+
+
+
+
+#2.2 plot clipped areas, circles 
+library(rgdal)
+library(sf)
+area_test<-st_read("C:/Users/MicTorresani/OneDrive - Scientific Network South Tyrol/varie/corsi/physalia/LiDAR 2025/data/starting_data/shp/area_shp_test.shp")
+
+plot(area_test)
+clipped_las<-clip_roi(las, area_test)
+plot(clipped_las)#clip my las with given gps point and given radius
+area_circle<-clip_circle(las, x=679368, y=5155974, radius = 50   )
+p1 <- c(679368, 5155974)
+p2 <- c(679468, 5156074)
+area_circle<-clip_circle(las, x=p1[1], y=p1[2], radius = 50   )
+plot(area_circle)
