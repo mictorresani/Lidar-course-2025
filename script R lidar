@@ -102,3 +102,46 @@ p1 <- c(679368, 5155974)
 p2 <- c(679468, 5156074)
 area_circle<-clip_circle(las, x=p1[1], y=p1[2], radius = 50   )
 plot(area_circle)
+
+
+
+
+
+#3. classification of the point cloud
+#classify point cloud, we use the function classify_ground ()
+#PMF
+classification1<-classify_ground(las, algorithm = pmf(ws=5, th=3) )
+
+transect<-clip_transect(classification1, p1, p2, width = 5)
+ggplot(payload(transect), aes(X,Z, color=Classification  ) )+
+  geom_point()+
+  ggtitle("pmf")+
+  theme_minimal()+
+  scale_color_viridis_c(option="viridis")
+
+
+ws<-seq(3, 12, 3)
+ws
+th<-seq(0.1, 2, length.out= length(ws))
+
+classification2<-classify_ground(las, algorithm = pmf(ws=ws, th=th) )
+transect<-clip_transect(classification2, p1, p2, width = 5)
+ggplot(payload(transect), aes(X,Z, color=Classification  ) )+
+  geom_point()+
+  ggtitle("pmf_tuned")+
+  theme_minimal()+
+  scale_color_viridis_c(option="viridis")
+
+
+
+
+#CSF
+library(RCSF)
+
+classification_csf<-classify_ground(las, algorithm = csf()) #based on Zang et al 2016. 
+transect<-clip_transect(classification_csf, p1, p2, width = 5) #we can change the transect width if needed
+ggplot(payload(transect), aes(X,Z, color=Classification  ) )+
+  geom_point()+
+  ggtitle("csf")+
+  theme_minimal()+
+  scale_color_viridis_c(option="viridis")
