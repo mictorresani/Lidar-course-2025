@@ -1,1 +1,34 @@
+#1. reading the point cloud
+#read LAS point cloud
+las<-readLAS("C:/Users/MicTorresani/OneDrive - Scientific Network South Tyrol/varie/corsi/physalia/LiDAR 2025/data/starting_data/las/las_area1.laz")
+las#plot the point cloud
+plot(las)#read only x,y,z
+# density: 4.76 pulses/m²  Pulse density (or "pulse rate") This is the number of laser pulses emitted per square meter.Pulses = quanti colpi sparo
+# 8.87 points/m² number of LiDAR returns (points) per square meter. Points = quanti rimbalzi ricevo
+
+
+las<-readLAS("C:/Users/MicTorresani/OneDrive - Scientific Network South Tyrol/varie/corsi/physalia/LiDAR 2025/data/starting_data/las/las_area1.laz",select = "xyz" )#read only first return
+las<-readLAS("C:/Users/MicTorresani/OneDrive - Scientific Network South Tyrol/varie/corsi/physalia/LiDAR 2025/data/starting_data/las/las_area1.laz",filter = "-keep_last" )  #-keep_last
+plot(las)
+las_check(las) #check if the point cloud is fine
+
+
+#-keep_first	Keep only the first return of each pulse
+#-keep_last	Keep only the last return
+#-keep_single	Keep returns from pulses with only one return
+#-keep_intermediate	Keep returns that are neither first nor last
+#-drop_first	Exclude first returns
+#-drop_last	Exclude last returns
+#-drop_z_below x
+#-drop_z_above 900 NB is m above sea level
+#las <-  readLAS("file.las", filter = "-keep_first -drop_z_below 5 -drop_z_above 50")
+
+
+
+#2.1 plot the point cloud
+plot(las, bg="white")
+plot(las, color="RGB")#if you have structrue from motion data you can plot in RGB
+plot(las, color="Classification", bg="white", legend=TRUE )#plot specific information of the point cloud e.g. classification 
+plot(las, color="Intensity", bg="white", legend=TRUE ) #plot intensity
+
 
