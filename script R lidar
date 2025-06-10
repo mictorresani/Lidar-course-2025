@@ -32,3 +32,20 @@ plot(las, color="Classification", bg="white", legend=TRUE )#plot specific inform
 plot(las, color="Intensity", bg="white", legend=TRUE ) #plot intensity
 
 
+
+
+
+#exercise 1
+#open the las2
+#plot the point cloud
+#how is the pulse density?
+#check if the point cloud is fine
+#re-load the point cloud and plot it using only points below  1750
+#plot specific information of the point cloud of the area above 1900m: try to plot the number of returns - never done but you can try! do it with a blue background and adding a legend 
+las2<-readLAS("C:/Users/MicTorresani/OneDrive - Scientific Network South Tyrol/varie/corsi/physalia/LiDAR 2025/data/starting_data/las/area2/DownloadService/las_area2.laz")
+plot(las2)
+las_check(las2)
+las2<-readLAS("C:/Users/MicTorresani/OneDrive - Scientific Network South Tyrol/varie/corsi/physalia/LiDAR 2025/data/starting_data/las/area2/DownloadService/las_area2.laz",filter = "-drop_z_above 1750" ) 
+plot(las2)
+las2<-readLAS("C:/Users/MicTorresani/OneDrive - Scientific Network South Tyrol/varie/corsi/physalia/LiDAR 2025/data/starting_data/las/area2/DownloadService/las_area2.laz",filter = "-drop_z_below 1900" ) 
+plot(las2, color="ReturnNumber", bg="blue", legend=TRUE )
