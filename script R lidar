@@ -49,3 +49,17 @@ las2<-readLAS("C:/Users/MicTorresani/OneDrive - Scientific Network South Tyrol/v
 plot(las2)
 las2<-readLAS("C:/Users/MicTorresani/OneDrive - Scientific Network South Tyrol/varie/corsi/physalia/LiDAR 2025/data/starting_data/las/area2/DownloadService/las_area2.laz",filter = "-drop_z_below 1900" ) 
 plot(las2, color="ReturnNumber", bg="blue", legend=TRUE )
+
+
+
+#open Qgis
+p1 <- c(679368, 5155974)
+p2 <- c(679468, 5156074)
+transect<-clip_transect(las, p1, p2, width = 5) #plot point cloud transect
+
+
+ggplot(payload(transect), aes(X,Z, color=Z  ) )+ #you can plot also other infos color=Intensity, color=Classification... check doing transect$
+  geom_point()+
+  theme_minimal()+
+  scale_color_viridis_c(option="viridis")#clip the las with the shapefile of a given polygon
+
